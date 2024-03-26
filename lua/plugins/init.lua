@@ -1,0 +1,9 @@
+--require "plugins.theme"
+--require "plugins.telescope"
+--require "plugins.treesitter"
+--require "plugins.mason"
+--require "plugins.lspconfig"
+--require "plugins.plg_cmp"
+--require "plugins.notify"
+--require "plugins.line"
+return {}
