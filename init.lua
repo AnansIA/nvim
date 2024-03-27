@@ -1,6 +1,5 @@
 require("config")
 require("plugins")
-
 -- Copiar todo el buffer al portapapeles del sistema
 vim.api.nvim_set_keymap('n', '<Leader>c', ':%y+<CR>', { noremap = true, silent = true })
 
