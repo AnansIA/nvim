@@ -11,6 +11,7 @@ return {
 		"anuvyklack/hydra.nvim",
 		"nvim-telescope/telescope-dap.nvim",
 		"rcarriga/cmp-dap",
+		"mfussenegger/nvim-dap-python"
 	},
 	config = function()
 		require("config.nvimdapconf")
@@ -48,7 +49,9 @@ return {
 			else
 				cb({
 					type = 'executable',
-					command = vim.fn.stdpath("data") .. "/.virtualenvs/debugpy/bin/python",
+				--command = vim.fn.stdpath("data") .. "/lua/.virtualenvs/debugpy/bin/python",
+				command = require('config.nvimdapconf').actual_path('run'),
+
 					args = { '-m', 'debugpy.adapter' },
 					options = {
 						source_filetype = 'python',
