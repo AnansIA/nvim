@@ -11,57 +11,32 @@ return {
 		'neovim/nvim-lspconfig',
 		'windwp/nvim-autopairs',
 	},
-	event = "VeryLazy",
 	config = function()
-		local luasnip = require("luasnip")
-		require("luasnip/loaders/from_vscode").lazy_load()
-		local cmp = require('cmp')
+		local cmp = require 'cmp'
+		
 		cmp.setup({
 			snippet = {
 				expand = function(args)
-					luasnip.lsp_expand(args.body)
+					require('luasnip').lsp_expand(args.body) -- Asegúrate de que luasnip está instalado
 				end,
 			},
-			view = {
-				entries = 'custom', -- this appears to be the issue
-			},
-			sources = {
-				{
-					{
-						name = 'buffer',
-						option = {
-							get_bufnrs = function()
-								return { vim.api.nvim_get_current_buf() }
-							end,
-
-						}
-					},
-					{ name = 'path' },
-					{ name = 'nvim_lsp' },
-					{ name = 'luasnip' },
-					{ name = 'cmdline' },
-
-				}, {
-				name = 'buffer',
-			}
-			},
-			mapping = {
-				['<C-a>'] = cmp.mapping.scroll_docs(-4),
-				['<C-b>'] = cmp.mapping.scroll_docs(4),
+			mapping = cmp.mapping.preset.insert({
+				['<C-d>'] = cmp.mapping.scroll_docs(-1),
+				['<C-f>'] = cmp.mapping.scroll_docs(1),
 				['<C-Space>'] = cmp.mapping.complete(),
 				['<C-e>'] = cmp.mapping.abort(),
-				['<Tab>'] = cmp.mapping.confirm({
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = true
-				}),
-			},
-			window = {
-				documentation = cmp.config.window.bordered()
-			},
+				['<CR>'] = cmp.mapping.confirm({ select = true }), -- Aceptar la sugerencia con Enter
+			}),
+			sources = cmp.config.sources({
+				{ name = 'nvim_lsp' },
+				{ name = 'luasnip' },
+				{ name = 'cmdline' },
+				{ name = 'buffer',  keyword_length = 3 }, -- Autocompletado de palabras en el buffer actual
+			})
 		})
-
 		cmp.event:on("confirm_done",
 			require('nvim-autopairs.completion.cmp').on_confirm_done { map_char = { text = "" } })
+		require("luasnip/loaders/from_vscode").lazy_load()
 		cmp.setup.filetype('gitcommit', {
 			sources = cmp.config.sources({
 				--{ name = 'git' },
@@ -90,5 +65,6 @@ return {
 			}),
 			matching = { disallow_symbol_nonprefix_matching = false }
 		})
+
 	end
 }

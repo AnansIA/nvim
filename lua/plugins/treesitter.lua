@@ -1,18 +1,37 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		'LiadOz/nvim-dap-repl-highlights'
+		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
-	lazy = false,
-	build = function()
-		require("nvim-treesitter.install").update({ with_sync = true })()
-		require('nvim-dap-repl-highlights').setup()
-		require('nvim-treesitter.configs').setup {
-			highlight = {
+	build = ":TSUpdate",
+	event = "VeryLazy",
+	main = "nvim-treesitter.configs",
+	opts = {
+		ensure_installed = {
+			"lua",
+			"luadoc",
+			"python",
+		},
+		highlight = {
+			enable = true,
+		},
+		indent = {
+			enable = true,
+		},
+		textobjects = {
+			select = {
 				enable = true,
-			},
-			ensure_installed = { 'dap_repl' },
+				lookahead = true,
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					["ac"] = "@conditional.outer",
+					["ic"] = "@conditional.inner",
+					["al"] = "@loop.outer",
+					["il"] = "@loop.inner",
 
+				}
+			}
 		}
-	end,
+	}
 }
