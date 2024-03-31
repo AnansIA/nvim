@@ -1,9 +1,13 @@
---require "plugins.theme"
---require "plugins.telescope"
---require "plugins.treesitter"
---require "plugins.mason"
---require "plugins.lspconfig"
---require "plugins.plg_cmp"
---require "plugins.notify"
---require "plugins.line"
+--return {require "plugins.theme",
+--require "plugins.telescope",
+--require "plugins.treesitter",
+--require "plugins.mason",
+--require "plugins.lspconfig",
+--require "plugins.plg_cmp",
+--require "plugins.notify",
+--require "plugins.line",
+--require "plugins.fugitive",
+--require "plugins.luasnip",
+--
+--}
 return {}

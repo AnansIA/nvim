@@ -1,4 +1,7 @@
 return {
     "williamboman/mason.nvim",
-    config = true
+    
+    config = require('mason').setup({
+    automatic_installation = true,  -- automáticamente instala los LSPs
+    })
     }
