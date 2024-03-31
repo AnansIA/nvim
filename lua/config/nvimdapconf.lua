@@ -29,36 +29,22 @@ local function actual_path(mode)
 	end
 end
 local function setup_debugpy_virtualenv()
-	vim.notify = require("notify")
-
 	local virtualenv_dir = actual_path('base') --vim.fn.expand("/lua/.virtualenvs/debugpy")
 	local python_path = actual_path('run')
-	local activate_script = actual_path('source')
 
 	if vim.fn.isdirectory(virtualenv_dir) == 0 then
 		-- Si el directorio no existe, crea el entorno virtual
-
-		vim.notify("Se crea el espacio de trabajo: " .. virtualenv_dir .. actual_path('env'),
-			"error")
-		local create_command = "mkdir "..virtualenv_dir .." | python -m venv " .. virtualenv_dir .. actual_path('env')
+		local create_command = "mkdir " ..
+		virtualenv_dir .. " | python -m venv " .. virtualenv_dir .. actual_path('env')
 		run_shell_command(create_command)
 		-- Instala debugpy en el entorno virtual
-		vim.notify("Entro a instalar algo", "error")
 		local install_command = python_path .. " -m pip install " .. actual_path('mod')
 		if run_shell_command(install_command) == 0 then
 			-- Imprime un mensaje indicando que el entorno virtual ha sido creado y activado
-			vim.notify(
-				"Entorno virtual para debugpy creado en: " .. virtualenv_dir,
-				"error")
-			--local changes_per = "chmod +x " .. python_path
-			--if run_shell_command(changes_per) == 0 then
-			vim.notify("Se envia la ruta" .. python_path, "error")
 			return python_path
 			--end
 		end
 	else
-		vim.notify("El directorio existia!" .. python_path, "error")
-		-- Si el directorio ya existe, simplemente devuelve la ruta al intérprete de Python
 		return python_path
 	end
 end
