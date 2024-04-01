@@ -1,4 +1,5 @@
 return {
+	--imports
 	"hrsh7th/nvim-cmp",
 	dependencies = {
 		'hrsh7th/cmp-nvim-lsp',
@@ -13,7 +14,6 @@ return {
 	},
 	config = function()
 		local cmp = require 'cmp'
-		
 		cmp.setup({
 			snippet = {
 				expand = function(args)
@@ -25,7 +25,7 @@ return {
 				['<C-f>'] = cmp.mapping.scroll_docs(1),
 				['<C-Space>'] = cmp.mapping.complete(),
 				['<C-e>'] = cmp.mapping.abort(),
-				['<CR>'] = cmp.mapping.confirm({ select = true }), -- Aceptar la sugerencia con Enter
+				['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Aceptar la sugerencia con Enter
 			}),
 			sources = cmp.config.sources({
 				{ name = 'nvim_lsp' },
@@ -36,11 +36,8 @@ return {
 		})
 		cmp.event:on("confirm_done",
 			require('nvim-autopairs.completion.cmp').on_confirm_done { map_char = { text = "" } })
-		require("luasnip/loaders/from_vscode").lazy_load()
 		cmp.setup.filetype('gitcommit', {
 			sources = cmp.config.sources({
-				--{ name = 'git' },
-			--}, {
 				{ name = 'buffer' },
 			})
 		})
@@ -65,6 +62,5 @@ return {
 			}),
 			matching = { disallow_symbol_nonprefix_matching = false }
 		})
-
 	end
 }

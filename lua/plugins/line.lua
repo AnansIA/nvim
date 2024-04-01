@@ -1,6 +1,8 @@
 return {
+	--imports
 	'nvim-lualine/lualine.nvim',
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
+	--configs
 	config = function()
 		require('lualine').setup({
 			options = {

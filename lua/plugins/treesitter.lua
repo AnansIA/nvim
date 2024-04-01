@@ -1,10 +1,14 @@
 return {
+	--imports
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
+	--actions
 	build = ":TSUpdate",
+	--chaarge
 	event = "VeryLazy",
+	--configs
 	main = "nvim-treesitter.configs",
 	opts = {
 		ensure_installed = {
