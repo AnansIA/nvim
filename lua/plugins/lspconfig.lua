@@ -45,6 +45,11 @@ return {
 				}
 			}
 		})
+		require("lspconfig").clangd.setup({
+			settings = {
+				clangd = {}
+			}
+		})
 
 		require("lspconfig").pylsp.setup({
 			settings = {
