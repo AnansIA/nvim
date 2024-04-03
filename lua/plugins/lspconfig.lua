@@ -51,6 +51,21 @@ return {
 			}
 		})
 
+
+		require("lspconfig").ltex.setup({
+			settings =  {
+				ltext = {
+					additionalRules = {
+						enablePickyRules = true,
+					},
+					completionEnabled = true,
+					language = "es_AR",
+
+				} 
+			}
+		})
+		
+
 		require("lspconfig").pylsp.setup({
 			settings = {
 				pylsp = {
