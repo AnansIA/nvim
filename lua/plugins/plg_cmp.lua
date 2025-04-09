@@ -25,7 +25,9 @@ return {
 				['<C-f>'] = cmp.mapping.scroll_docs(1),
 				['<C-Space>'] = cmp.mapping.complete(),
 				['<C-e>'] = cmp.mapping.abort(),
-				['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Aceptar la sugerencia con Enter
+				['<CR>'] = cmp.mapping.confirm({ select = true }), -- Aceptar la sugerencia con Enter
+				['<C-j>'] = cmp.mapping.select_next_item(),        -- Siguiente sugerencia
+			        ['<C-k>'] = cmp.mapping.select_prev_item(),        -- Anterior sugerencia
 			}),
 			sources = cmp.config.sources({
 				{ name = 'nvim_lsp' },
